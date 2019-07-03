@@ -14,19 +14,20 @@ import java.util.Map;
 class ImageColorClassifier {
 
     RGBColorSpace getDominantColor(String filename, double maxDifference){
-        PNGRepresentation image = PNGReader.read(filename);
+        PNGRepresentation image = new PNGReader().read(filename);
         Map<RGBColorSpace, Integer> colorFrequency = getColorFrequence(image, maxDifference);
         return calculateDominantColor(colorFrequency, image.getPixels().size());
     }
 
     private Map<RGBColorSpace, Integer> getColorFrequence(PNGRepresentation image, double maxDifference){
-        Map<RGBColorSpace, Integer> colorFrequency = new HashMap<>(){{ put(image.getPixels().get(0), 1); }};
+        Map<RGBColorSpace, Integer> colorFrequency = new HashMap<>();
+        colorFrequency.put(image.getPixels().get(0), 1);
 
         for(int pixelIndex = 1; pixelIndex < image.getPixels().size(); pixelIndex++){
             ArrayList<Pair<Double, RGBColorSpace>> differences = getDifferences(image, colorFrequency, pixelIndex);
             differences = secretoryDifferences(differences, maxDifference);
 
-            if(differences.size() > 0){
+            if(!differences.isEmpty()){
                 Collections.sort(differences);
                 colorFrequency.put(differences.get(0).getValue1(), colorFrequency.get(differences.get(0).getValue1()) + 1);
             } else colorFrequency.put(image.getPixels().get(pixelIndex), 1);
@@ -51,7 +52,7 @@ class ImageColorClassifier {
         return newDifferences;
     }
 
-    private RGBColorSpace calculateDominantColor(Map<RGBColorSpace, Integer> colorFrequency, int weight_sum){
+    private RGBColorSpace calculateDominantColor(Map<RGBColorSpace, Integer> colorFrequency, int weightSum){
         double red = 0;
         double green = 0;
         double blue = 0;
@@ -62,7 +63,7 @@ class ImageColorClassifier {
             blue += entry.getKey().getBlue() * entry.getValue();
         }
 
-        return new RGBColorSpace((int)Math.round(red/weight_sum), (int)Math.round(green/weight_sum), (int)Math.round(blue/weight_sum));
+        return new RGBColorSpace((int)Math.round(red/weightSum), (int)Math.round(green/weightSum), (int)Math.round(blue/weightSum));
     }
 
 }

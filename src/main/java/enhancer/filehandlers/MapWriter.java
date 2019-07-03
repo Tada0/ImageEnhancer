@@ -8,9 +8,9 @@ import java.util.Map;
 
 public class MapWriter {
 
-    public static void write(String filename, Map<String, RGBColorSpace> map) {
+    public void write(String filename, Map<String, RGBColorSpace> map) {
         try (FileWriter fileWriter = new FileWriter(filename)) {
-            for (String key : map.keySet()) fileWriter.write(key + "-" + map.get(key).toString() + "\n");
+            for (Map.Entry<String, RGBColorSpace> entry: map.entrySet()) fileWriter.write(entry.getKey() + "-" + entry.getValue().toString() + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -3,7 +3,6 @@ package enhancer.imageprocessors;
 import enhancer.colorspaces.RGBColorSpace;
 import enhancer.filehandlers.PNGRepresentation;
 
-import java.util.ArrayList;
 import java.util.List;
 
 class Chunk {

@@ -13,7 +13,6 @@ import java.util.Objects;
 
 public class Main {
     public static void main(String... args) {
-        long time = System.currentTimeMillis();
         String workingDirectory = System.getProperty("user.dir");
         String filepath = workingDirectory + "\\assets\\papaj.png";
         String tempDirectory = workingDirectory + "\\assets\\temp\\";
@@ -31,7 +30,5 @@ public class Main {
 
         Map<Integer, String> imageChangeMap = new ImageComparator().getChangeMap(dataFilePath, referenceDataFilePath);
         new ImageComposer().compose(filepath, referenceImagesDirectory, imageChangeMap, target, 32);
-        long to = System.currentTimeMillis();
-        System.out.println(to - time);
     }
 }

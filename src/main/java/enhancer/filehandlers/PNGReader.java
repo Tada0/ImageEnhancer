@@ -6,34 +6,35 @@ import ij.IJ;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PNGReader {
 
-    public static PNGRepresentation read(String filePath){
+    public PNGRepresentation read(String filePath){
         BufferedImage image = IJ.openImage(filePath).getBufferedImage();
         return getData(image);
     }
 
-    private static PNGRepresentation getData(BufferedImage image){
-        int image_width = getWidth(image);
-        int image_height = getHeight(image);
-        ArrayList<RGBColorSpace> pixels = getPixels(image, image_width, image_height);
-        return new PNGRepresentation(image_width, image_height, pixels);
+    private PNGRepresentation getData(BufferedImage image){
+        int imageWidth = getWidth(image);
+        int imageHeight = getHeight(image);
+        List<RGBColorSpace> pixels = getPixels(image, imageWidth, imageHeight);
+        return new PNGRepresentation(imageWidth, imageHeight, pixels);
     }
 
-    private static int getWidth(BufferedImage image){
+    private int getWidth(BufferedImage image){
         return image.getWidth();
     }
 
-    private static int getHeight(BufferedImage image){
+    private int getHeight(BufferedImage image){
         return image.getHeight();
     }
 
-    private static ArrayList<RGBColorSpace> getPixels(BufferedImage image, int image_width, int image_height){
-        ArrayList<RGBColorSpace> pixels = new ArrayList<RGBColorSpace>();
+    private List<RGBColorSpace> getPixels(BufferedImage image, int imageWidth, int imageHeight){
+        List<RGBColorSpace> pixels = new ArrayList<>();
 
-        for(int y = 0; y < image_height; y++) {
-            for (int x = 0; x < image_width; x++) {
+        for(int y = 0; y < imageHeight; y++) {
+            for (int x = 0; x < imageWidth; x++) {
                 Color pixelColor = new Color(image.getRGB(x, y));
                 pixels.add(new RGBColorSpace(pixelColor.getRed(), pixelColor.getGreen(), pixelColor.getBlue()));
             }

@@ -7,8 +7,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -24,8 +22,8 @@ public class ImageComposerTest {
         String referenceImagesDirectory = workingDirectory + "\\assets\\ReferenceImagesPNG\\";
         String referenceDataFilePath = workingDirectory + "\\assets\\ClassificationFiles\\referenceClassificationFile";
         String referenceImagePath = workingDirectory + "\\assets\\6target.png";
-        PNGRepresentation image = PNGReader.read(imagePath);
-        PNGRepresentation referenceImage = PNGReader.read(referenceImagePath);
+        PNGRepresentation image = new PNGReader().read(imagePath);
+        PNGRepresentation referenceImage = new PNGReader().read(referenceImagePath);
         Map<Integer, String> imageChangeMap = new ImageComparator().getChangeMap(dataFilePath, referenceDataFilePath);
         ImageComposer imageComposer = new ImageComposer();
 

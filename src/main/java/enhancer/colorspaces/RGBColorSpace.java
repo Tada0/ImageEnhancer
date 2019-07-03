@@ -1,9 +1,8 @@
 package enhancer.colorspaces;
 
-import enhancer.filehandlers.PNGReader;
-
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class RGBColorSpace {
     private int red;
@@ -43,6 +42,11 @@ public class RGBColorSpace {
             return tryObj.red == this.red && tryObj.green == this.green && tryObj.blue == this.blue;
         }
         return false;
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(this.red, this.green, this.blue);
     }
 
     public String toString() { return "(" + this.red + ", " + this.green + ", " + this.blue + ')'; }

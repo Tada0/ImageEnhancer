@@ -11,8 +11,8 @@ import java.util.List;
 
 public class MapReader {
 
-    public static ArrayList<Pair<String, RGBColorSpace>> read(String filepath){
-        ArrayList<Pair<String, RGBColorSpace>> lines = new ArrayList<>();
+    public List<Pair<String, RGBColorSpace>> read(String filepath){
+        List<Pair<String, RGBColorSpace>> lines = new ArrayList<>();
         try {
             List<String> allLines = Files.readAllLines(Paths.get(filepath));
             for (String line : allLines) {

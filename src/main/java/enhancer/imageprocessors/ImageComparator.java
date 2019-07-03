@@ -9,15 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toMap;
 
 public class ImageComparator {
 
     public Map<Integer, String> getChangeMap(String imageDataFile, String referenceDataFile) {
-        List<Pair<String, RGBColorSpace>> imageClassificationList = MapReader.read(imageDataFile);
-        List<Pair<String, RGBColorSpace>> referenceClassificationList = MapReader.read(referenceDataFile);
+        List<Pair<String, RGBColorSpace>> imageClassificationList = new MapReader().read(imageDataFile);
+        List<Pair<String, RGBColorSpace>> referenceClassificationList = new MapReader().read(referenceDataFile);
         return createImageChangeMap(imageClassificationList, referenceClassificationList);
     }
 

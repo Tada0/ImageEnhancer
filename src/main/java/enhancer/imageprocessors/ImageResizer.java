@@ -11,9 +11,9 @@ import java.util.List;
 public class ImageResizer {
 
     public void cut(String filePath, int chunkSize){
-        PNGRepresentation image = PNGReader.read(filePath);
-        PNGRepresentation cut_image = processImage(image, chunkSize);
-        if(!(cut_image == image)) PNGWriter.write(cut_image, filePath);
+        PNGRepresentation image = new PNGReader().read(filePath);
+        PNGRepresentation cutImage = processImage(image, chunkSize);
+        if(cutImage != image) new PNGWriter().write(cutImage, filePath);
     }
 
     private PNGRepresentation processImage(PNGRepresentation image, int chunk){
@@ -46,7 +46,7 @@ public class ImageResizer {
     }
 
     private List<RGBColorSpace> cutVertically(List<RGBColorSpace> oldPixels, int newWidth, int newHeight){
-        List<RGBColorSpace> newPixels = new ArrayList<RGBColorSpace>();
+        List<RGBColorSpace> newPixels = new ArrayList<>();
 
         for(int i = 0; i < newWidth * newHeight; i++){
             newPixels.add(oldPixels.get(i));

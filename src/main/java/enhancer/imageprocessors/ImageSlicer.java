@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class ImageSlicer {
 
     public boolean sliceIntoChunks(String filepath, String targetDirectory, int chunkSize){
-        PNGRepresentation image = PNGReader.read(filepath);
+        PNGRepresentation image = new PNGReader().read(filepath);
         ArrayList<ArrayList<RGBColorSpace>> chunks = getChunks(image, chunkSize);
         ArrayList<PNGRepresentation> imagesFromChunks = getImagesFromChunks(chunks, chunkSize);
         if(new DirectoryCreator().create(targetDirectory)){
@@ -70,7 +70,7 @@ public class ImageSlicer {
 
     private void saveImages(ArrayList<PNGRepresentation> images, String targetDirectory){
         for(int i = 0; i < images.size(); i++){
-            PNGWriter.write(images.get(i), targetDirectory + "Image_" + i + ".png");
+            new PNGWriter().write(images.get(i), targetDirectory + "Image_" + i + ".png");
         }
     }
 

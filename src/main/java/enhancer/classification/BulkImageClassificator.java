@@ -14,7 +14,7 @@ public class BulkImageClassificator {
             RGBColorSpace newClassification = new ImageColorClassifier().getDominantColor(imagesPath + "Image_" + i + ".png", maxDifference);
             classifications.put("Image_" + i + ".png", newClassification);
         }
-        MapWriter.write(filename, classifications);
+        new MapWriter().write(filename, classifications);
     }
 
 }

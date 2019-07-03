@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class PNGWriter {
 
-    public static void write(PNGRepresentation image, String filepath){
+    public void write(PNGRepresentation image, String filepath){
         byte[] pixelByteArray = createByteArray(image);
         DataBuffer dataBuffer = new DataBufferByte(pixelByteArray, pixelByteArray.length);
         WritableRaster writableRaster = Raster.createInterleavedRaster(dataBuffer, image.getWidth(), image.getHeight(), 3 * image.getWidth(), 3, new int[] {0, 1, 2}, (Point)null);
@@ -17,7 +17,7 @@ public class PNGWriter {
         overrideFile(bufferedImage, filepath);
     }
 
-    private static byte[] createByteArray(PNGRepresentation image){
+    private byte[] createByteArray(PNGRepresentation image){
         byte[] pixelByteArray = new byte[image.getPixels().size() * 3];
 
         for(int i = 0; i < image.getPixels().size(); i++){
@@ -29,7 +29,7 @@ public class PNGWriter {
         return pixelByteArray;
     }
 
-    private static void overrideFile(BufferedImage bufferedImage, String filepath){
+    private void overrideFile(BufferedImage bufferedImage, String filepath){
         try {
             ImageIO.write(bufferedImage, "png", new File(filepath));
         } catch (IOException e) {
